@@ -11,6 +11,9 @@ inputs:
   dist-folder:
     description: The folder contains deployment files
     required: true
+outputs:
+  website-url:
+    description: URL of deployed website
 runs:
   using: node20
   main: main.js

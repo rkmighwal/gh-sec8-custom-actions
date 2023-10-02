@@ -63,6 +63,7 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site
+        id: deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
@@ -70,6 +71,9 @@ jobs:
         with:
           bucket: gh-sec07-custom-actions
           dist-folder: ./dist
+      - name: Output Info
+        run: |
+          echo "Live URL: ${{ steps.deploy.outputs.website-url }}"
   # information:
   #   runs-on: ubuntu-latest
   #   steps:
