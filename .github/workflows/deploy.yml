@@ -9,10 +9,13 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Load & Cahce Dependecies
+      - name: Load & Cache Dependecies
         uses: ./.github/actions/cached-deps
+        id: cache-deps
         with:
           caching: 'false'
+      - name: output info
+        run: echo "Cache Used? ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Lint code
         run: npm run lint
   test:
@@ -20,7 +23,7 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Load & Cahce Dependecies
+      - name: Load & Cache Dependecies
         uses: ./.github/actions/cached-deps
       - name: Test code
         id: run-tests
@@ -37,7 +40,7 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Load & Cahce Dependecies
+      - name: Load & Cache Dependecies
         uses: ./.github/actions/cached-deps
       - name: Build website
         run: npm run build
